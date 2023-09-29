@@ -1,10 +1,13 @@
 import "package:flutter/material.dart";
-import "package:koko/utils/widget/appbar.dart";
 import "package:koko/widget/bg_btn.dart";
 import "package:lottie/lottie.dart";
 
+import "../../main.dart";
+import "../../widget/appbar.dart";
+
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final MyDrawerController drawerController;
+  const Home({super.key, required this.drawerController});
 
   @override
   State<StatefulWidget> createState() => _HomeState();
@@ -25,7 +28,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: zhAppBar("Get"),
+      appBar: zhAppBar("Get", leftButtonClick: () {
+        widget.drawerController.toggleDrawer();
+      }),
       body: Column(
         children: [
           Center(

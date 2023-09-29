@@ -1,19 +1,23 @@
 import "package:flutter/material.dart";
+import "package:koko/module/user/user.dart";
 
-import "../utils/zh_animated_bottom_bar.dart";
+import "../main.dart";
+import "../widget/zh_animated_bottom_bar.dart";
 import "home/home.dart";
-import "second/second.dart";
+import "msg/msg.dart";
+import "search/search.dart";
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, this.title});
-
-  final String? title;
+class Index extends StatefulWidget {
+  final MyDrawerController drawerController;
+  const Index({super.key, required this.drawerController});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<StatefulWidget> createState() {
+    return _IndexState();
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _IndexState extends State<Index> {
   int _currentIndex = 0;
 
   final _inactiveColor = Colors.grey;
@@ -22,12 +26,6 @@ class _MyHomePageState extends State<MyHomePage> {
   late PageController _pageController;
 
   List<String> titles = ["Get", "Search", "Msg", "User"];
-  List<Widget> navigationList = [
-    const Home(),
-    const Second(),
-    const Second(),
-    const Second(),
-  ];
   @override
   void initState() {
     _pageController = PageController(keepPage: true, initialPage: 0);
@@ -43,7 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: _currentIndex, children: navigationList),
+      body: IndexedStack(index: _currentIndex, children: [
+        Home(drawerController: widget.drawerController),
+        const Search(),
+        const Msg(),
+        const User(),
+      ]),
       bottomNavigationBar: _buildBottomBar(),
     );
   }
