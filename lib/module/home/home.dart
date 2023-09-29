@@ -31,6 +31,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       appBar: zhAppBar("Get", leftButtonClick: () {
         widget.drawerController.toggleDrawer();
       }),
+      floatingActionButton: IconButton(
+        onPressed: () {},
+        color: Colors.teal,
+        icon: const Icon(Icons.add),
+      ),
       body: Column(
         children: [
           Center(
