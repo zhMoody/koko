@@ -40,7 +40,8 @@ class MyHomePage extends GetView<MyDrawerController> {
         borderRadius: 10.0,
         showShadow: true,
         angle: 0.0,
-        menuBackgroundColor: const Color(0xfffdfdf8),
+        menuBackgroundColor: Colors.cyan,
+        // menuBackgroundColor: const Color(0xfffdfdf8),
         drawerShadowsBackgroundColor: const Color(0x29f1f1f1),
         slideWidth: MediaQuery.of(context).size.width * 0.75,
       ),
@@ -54,7 +55,13 @@ class MenuScreen extends GetView<MyDrawerController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xfff1f1f1),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.topRight,
+          colors: [Colors.blue, Colors.cyan],
+        ),
+      ),
       child: SafeArea(
         child: Column(
           children: [
@@ -63,7 +70,7 @@ class MenuScreen extends GetView<MyDrawerController> {
               width: 100,
               height: 100,
               decoration: const BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                   boxShadow: [
                     BoxShadow(
@@ -73,6 +80,13 @@ class MenuScreen extends GetView<MyDrawerController> {
                       spreadRadius: 1,
                     )
                   ]),
+              child: const Center(
+                child: Icon(
+                  Icons.people,
+                  color: Colors.cyan,
+                  size: 40,
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             Text(
