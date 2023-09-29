@@ -37,7 +37,7 @@ class MyHomePage extends GetView<MyDrawerController> {
         controller: _.zoomDrawerController,
         menuScreen: const MenuScreen(),
         mainScreen: const MainScreen(),
-        borderRadius: 10.0,
+        borderRadius: 20.0,
         showShadow: true,
         angle: 0.0,
         menuBackgroundColor: Colors.cyan,
