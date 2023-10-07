@@ -1,6 +1,4 @@
-//     final queryUserPlist = queryUserPlistFromJson(jsonString);
-
-import 'dart:convert';
+import "dart:convert";
 
 QueryUserPlist queryUserPlistFromJson(String str) =>
     QueryUserPlist.fromJson(json.decode(str));

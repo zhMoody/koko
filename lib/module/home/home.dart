@@ -1,12 +1,11 @@
-import "package:fijkplayer/fijkplayer.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:get/get.dart";
-import "package:koko/widget/bg_btn.dart";
-import "package:koko/widget/player_skin.dart";
-import "package:lottie/lottie.dart";
+import "package:koko/api/json_to_dart/mock_data.dart";
+import "package:koko/util/extension.dart";
 
+import "../../api/mock_dao.dart";
 import "../../main.dart";
+import "../../util/net/net_adapter.dart";
 
 class Home extends StatefulWidget {
   final MyDrawerController drawerController;
@@ -20,22 +19,26 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   late AnimationController loveController;
   late ScrollController scrollController;
 
-  final player = FijkPlayer();
-  final url = "";
-
-  get curve => null;
-  // "http://v16m-default.akamaized.net/c808dc650e1c629aa59cb6c648cb37db/651ac7ba/video/tos/alisg/tos-alisg-ve-0051c001-sg/ogFY1r0DULNtSRngbB8lAOBngcQe9B7fbgFDyE/?a=2011&ch=0&cr=0&dr=0&net=5&cd=0%7C0%7C0%7C0&br=3462&bt=1731&bti=MzhALjBg&cs=0&ds=4&ft=iJOG.y7oZZv0PD1YhI.xg9wz.DKlBEeC~&mime_type=video_mp4&qs=0&rc=OWU3OjQ8N2ZoNDpmZjs6PEBpajRnZjQ6ZmczbjMzODYzNEAzYF8zMWFfNWAxLTEtNTIvYSNfbWsycjRfbl9gLS1kMC1zcw%3D%3D&l=2023100207140612C83BBBF69D6C11D0B2&btag=e000a8000";
+  late MockData mockData = MockData.init();
+  Future<NetResponse<Map<String, dynamic>>> getMockData() async {
+    return await MockDao.mockGetData();
+  }
 
   @override
   void initState() {
-    super.initState();
     loveController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 2000))
       ..addListener(() {
         setState(() {});
       });
-    player.setDataSource(url, autoPlay: true);
     scrollController = ScrollController();
+    getMockData().then((res) {
+      print(res);
+      setState(() {
+        mockData = MockData.fromJson(res.data!);
+      });
+    });
+    super.initState();
   }
 
   @override
@@ -96,36 +99,56 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           SliverFixedExtentList(
             itemExtent: 70,
             delegate: SliverChildListDelegate(
-              () {
-                List<Widget> list = [];
-                for (var i = 0; i < 60; i++) {
-                  var widg = ListTile(
-                    onTap: () {
-                      print(i);
-                    },
-                    title: Text("$i - XXXXXXXXXX"),
-                    subtitle: Text("$i - 000000000"),
-                    trailing: const Icon(Icons.chevron_right),
-                    leading: Container(
-                      width: 48,
-                      height: 48,
-                      decoration: const BoxDecoration(
-                        color: Colors.yellow,
-                        borderRadius: BorderRadius.all(Radius.circular(48)),
-                      ),
-                      child: Center(
-                        child: Text("${i + 1}",
-                            style: const TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ),
+              mockData.list.mapi((e, i) {
+                return ListTile(
+                  onTap: () {
+                    print(e.id);
+                  },
+                  title: Text(e.title),
+                  subtitle: Text(e.subTitle),
+                  trailing: const Icon(Icons.chevron_right),
+                  leading: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: const BoxDecoration(
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.all(Radius.circular(48)),
                     ),
-                  );
-                  list.add(widg);
-                }
-                return list;
-              }(),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(48)),
+                      child: Image.network(e.imgSrc, fit: BoxFit.cover),
+                    ),
+                  ),
+                );
+              }).toList(),
+              // List<Widget> list = [];
+              // for (var i = 0; i < mockData.list.length; i++) {
+              //   var widg = ListTile(
+              //     onTap: () {
+              //       print(i);
+              //     },
+              //     title: Text("$i - XXXXXXXXXX"),
+              //     subtitle: Text("$i - 000000000"),
+              //     trailing: const Icon(Icons.chevron_right),
+              //     leading: Container(
+              //       width: 48,
+              //       height: 48,
+              //       decoration: const BoxDecoration(
+              //         color: Colors.yellow,
+              //         borderRadius: BorderRadius.all(Radius.circular(48)),
+              //       ),
+              //       child: Center(
+              //         child: Text("${i + 1}",
+              //             style: const TextStyle(
+              //               fontSize: 25,
+              //               fontWeight: FontWeight.bold,
+              //             )),
+              //       ),
+              //     ),
+              //   );
+              //   list.add(widg);
+              // }
+              // return list;
             ),
           ),
         ],
