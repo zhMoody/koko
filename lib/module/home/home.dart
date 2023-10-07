@@ -121,34 +121,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ),
                 );
               }).toList(),
-              // List<Widget> list = [];
-              // for (var i = 0; i < mockData.list.length; i++) {
-              //   var widg = ListTile(
-              //     onTap: () {
-              //       print(i);
-              //     },
-              //     title: Text("$i - XXXXXXXXXX"),
-              //     subtitle: Text("$i - 000000000"),
-              //     trailing: const Icon(Icons.chevron_right),
-              //     leading: Container(
-              //       width: 48,
-              //       height: 48,
-              //       decoration: const BoxDecoration(
-              //         color: Colors.yellow,
-              //         borderRadius: BorderRadius.all(Radius.circular(48)),
-              //       ),
-              //       child: Center(
-              //         child: Text("${i + 1}",
-              //             style: const TextStyle(
-              //               fontSize: 25,
-              //               fontWeight: FontWeight.bold,
-              //             )),
-              //       ),
-              //     ),
-              //   );
-              //   list.add(widg);
-              // }
-              // return list;
             ),
           ),
         ],
