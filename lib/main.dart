@@ -40,7 +40,7 @@ class MyHomePage extends GetView<MyDrawerController> {
         borderRadius: 20.0,
         showShadow: true,
         angle: 0.0,
-        menuBackgroundColor: Colors.cyan,
+        menuBackgroundColor: Colors.white,
         // menuBackgroundColor: const Color(0xfffdfdf8),
         drawerShadowsBackgroundColor: const Color(0x29f1f1f1),
         slideWidth: MediaQuery.of(context).size.width * 0.75,
@@ -59,7 +59,7 @@ class MenuScreen extends GetView<MyDrawerController> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.topRight,
-          colors: [Colors.blue, Colors.cyan],
+          colors: [Color(0xffFF6B6B), Colors.white],
         ),
       ),
       child: SafeArea(
