@@ -1,6 +1,8 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:get/get.dart";
 import "package:koko/api/json_to_dart/mock_data.dart";
+import "package:koko/module/home/widget/detail.dart";
 import "package:koko/util/extension.dart";
 
 import "../../api/mock_dao.dart";
@@ -33,7 +35,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       });
     scrollController = ScrollController();
     getMockData().then((res) {
-      print(res);
       setState(() {
         mockData = MockData.fromJson(res.data!);
       });
@@ -103,20 +104,31 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 return ListTile(
                   onTap: () {
                     print(e.id);
+                    Get.to(
+                      HomeDetail(
+                        imgurl: e.imgSrc,
+                        id: e.id,
+                      ),
+                      duration: Duration(milliseconds: 500),
+                    );
                   },
                   title: Text(e.title),
                   subtitle: Text(e.subTitle),
                   trailing: const Icon(Icons.chevron_right),
-                  leading: Container(
-                    width: 48,
-                    height: 48,
-                    decoration: const BoxDecoration(
-                      color: Colors.yellow,
-                      borderRadius: BorderRadius.all(Radius.circular(48)),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(48)),
-                      child: Image.network(e.imgSrc, fit: BoxFit.cover),
+                  leading: Hero(
+                    tag: e.id,
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: const BoxDecoration(
+                        color: Colors.yellow,
+                        borderRadius: BorderRadius.all(Radius.circular(48)),
+                      ),
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(48)),
+                        child: Image.network(e.imgSrc, fit: BoxFit.cover),
+                      ),
                     ),
                   ),
                 );

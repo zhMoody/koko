@@ -15,8 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Zoom Drawer Demo",
+    return GetMaterialApp(
+      title: "KoKo",
+      defaultTransition: Transition.fade,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
