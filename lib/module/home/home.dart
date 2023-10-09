@@ -1,10 +1,10 @@
+import "package:KoKo/module/home/widget/detail.dart";
+import "package:KoKo/util/extension.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
-import "package:koko/api/json_to_dart/mock_data.dart";
-import "package:koko/module/home/widget/detail.dart";
-import "package:koko/util/extension.dart";
 
+import "../../api/json_to_dart/mock_data.dart";
 import "../../api/mock_dao.dart";
 import "../../main.dart";
 import "../../util/net/net_adapter.dart";
@@ -103,13 +103,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               mockData.list.mapi((e, i) {
                 return ListTile(
                   onTap: () {
-                    print(e.id);
                     Get.to(
                       HomeDetail(
                         imgurl: e.imgSrc,
                         id: e.id,
                       ),
-                      duration: Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 500),
                     );
                   },
                   title: Text(e.title),

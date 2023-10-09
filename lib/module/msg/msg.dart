@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "fish_icon.dart";
+
 class Msg extends StatefulWidget {
   const Msg({super.key});
 
@@ -10,13 +12,12 @@ class Msg extends StatefulWidget {
 class _MsgState extends State<Msg> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Center(
-        child: Container(
-          height: 100,
-          width: 100,
-          color: Colors.cyan,
-        ),
+        child: SizedBox(
+            height: 200,
+            width: 100,
+            child: FishIcon(isSelected: true, iconKind: IconKind.fishPlus)),
       ),
     );
   }

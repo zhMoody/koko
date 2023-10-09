@@ -1,6 +1,6 @@
+import "package:KoKo/widget/appbar.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
-import "package:koko/widget/appbar.dart";
 
 class HomeDetail extends StatefulWidget {
   final String imgurl;
