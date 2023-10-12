@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 
-import "fish_icon.dart";
-
 class Msg extends StatefulWidget {
   const Msg({super.key});
 
@@ -15,9 +13,9 @@ class _MsgState extends State<Msg> {
     return const SafeArea(
       child: Center(
         child: SizedBox(
-            height: 200,
-            width: 100,
-            child: FishIcon(isSelected: true, iconKind: IconKind.fishPlus)),
+          height: 200,
+          width: 100,
+        ),
       ),
     );
   }

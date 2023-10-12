@@ -1,3 +1,4 @@
+import "package:KoKo/widget/splash_screen.dart";
 import "package:flutter/material.dart";
 import "package:flutter_zoom_drawer/flutter_zoom_drawer.dart";
 import "package:get/get.dart";
@@ -22,7 +23,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MyHomePage(),
+      home: SplashScreen(
+        splashScreenState: SplashScreenState.usingGradient,
+        child: const MyHomePage(),
+      ),
     );
   }
 }
